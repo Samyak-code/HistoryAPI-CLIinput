@@ -1,39 +1,20 @@
+const yargs = require('yargs');
 const document = require('fs');
- const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 const { parse } = require('path');
   fetch("http://history.muffinlabs.com/date")
      .then(response => response.json())
     .then(data => {
-    });
+      let monthanswer = yargs.argv._[0];
+      let dateanswer = yargs.argv._[1]
+      console.log(`The month selected is ${monthanswer} and the data selected is ${dateanswer}`)
+    
 
-  var readline = require('readline');
-  var sl = readline.createInterface({
-     input: process.stdin,
-     output: process.stdout
-  });
-    sl.question("Month: ", function month(monthanswer )   {
-     console.log("Thank you for giving month", monthanswer);
-     sl.close();
 
-     var readline = require('readline');
-     var rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-     });
-     rl.question("Date: ", function (dateanswer)   {
-           
-            console.log("Thank you for giving date", dateanswer);
-       rl.close();
-     
-
-      fetch("https://history.muffinlabs.com/date/"+monthanswer+"/"+dateanswer)
+       fetch("https://history.muffinlabs.com/date/"+monthanswer+"/"+dateanswer)
     .then(response => response.json())
     
     .then(data => {
-
-          
-            
-          
         for(i=0; i<data.data.Events.length; i+=1){//i<length of data.data
         var events = "Event - "+(data.data.Events[i].text);
         console.log(events)
@@ -55,9 +36,9 @@ const { parse } = require('path');
       }
         
     });
-     });
-});
+  });
     
   
 
 
+ 
